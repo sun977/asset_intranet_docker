@@ -1,0 +1,19 @@
+# 这里是计划任务的说明
+
+# 子节点计划任务
+# 每10分钟监控一次scan进程，死了就拉起来
+*/10    *       *       *       *       /opt/python/GodV_Intranet_docker/tools/monitor_scan.sh
+
+# 子节点和主节点的心跳
+*/10    *       *       *       *       /opt/python/GodV_Intranet_docker/tools/heartbeat2master.sh
+
+# 每天晚上23点停止一次当前的所有扫描任务【monitor_scan.sh会自动拉起,减少数据库死锁频率】---20231011 add
+0    23       *       *       *       /opt/python/GodV_Intranet_docker/tools/stop_scan.sh
+
+# 主节点计划任务
+# 数据同步，每天清洗未完成的数据库查询任务，监控 sync_assets.py
+*/5    *       *       *       *       /opt/python/GodV_Intranet_docker/tools/monitor_sync.sh
+
+# 数据同步代码每天计划重启，防止数据库死锁
+0    23       *       *       *       /opt/python/GodV_Intranet_docker/tools/stop_sync.sh
+

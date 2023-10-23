@@ -1,0 +1,1 @@
+rsync -vrtopg scanner@10.95.58.94::python/GodV_Intranet /opt/python/ --password-file=/etc/rsync.pass
